@@ -31,6 +31,22 @@ class CommonOcr(object):
         except Exception as e:
             print('图片增强出错', e)
 
+    def dewarp(self):
+        # 图片切边矫正
+        url = 'https://api.textin.com/ai/service/v1/dewarp'
+        head = {}
+        
+        try:
+            #image = get_file_content(self._img_url)
+            image = requests.get(self._img_url).content
+            head['x-ti-app-id'] = self._app_id
+            head['x-ti-secret-code'] = self._secret_code
+            result = requests.post(url, data=image, headers=head)
+            return result.text
+        except Exception as e:
+            print('图片切边矫正出错', e)
+
+
     def recognize(self, image):
         # 国内通用票据识别
         url = 'https://api.textin.com/robot/v1.0/api/bills_crop'

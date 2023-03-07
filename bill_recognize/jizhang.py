@@ -95,10 +95,10 @@ def jizhang(bill):
     i = second_classify(bill)
     other_items(bill, i)
 
-    if jz.superclass is '饮食' and jz.subclass is 'none':
+    if jz.superclass in ['none', '餐饮'] and jz.subclass is 'none':
         snack = [
             "薯片", "饼干", "君乐宝", "糖", "奶", "茶", "可乐", "果冻", "巧克力", "酥", "蛋糕", "点心", "干脆面", "辣条",
-            "锅巴", "仙贝", "虾条", "小馒头", "海苔", "蛋卷", "泡芙", "面包", "派", "Q蒂", "沙琪玛", "魔芋", "肉脯", "君乐宝",
+            "锅巴", "仙贝", "虾条", "小馒头", "海苔", "蛋卷", "泡芙", "奶油", "面包", "派", "Q蒂", "沙琪玛", "魔芋", "肉脯", "君乐宝",
             "真果粒", "金典", "特仑苏", "山楂树下", "优酸乳", "AD钙", "营养快线", "发酵乳", "优乐美", "蜜饯", "鱼干", "香肠",
             "罐头", "卤鸡蛋", "元気森林", "牛肉干", "红牛", "脉动", "健力宝", "康师傅", "健力宝", "加多宝", "娃哈哈", "锐澳",
             "王老吉", "伊利", "蒙牛", "东方树叶", "盼盼", "三得利", "旺仔", "雪碧", "雀巢", "李子园", "海河", "喜之郎",
@@ -117,19 +117,28 @@ def jizhang(bill):
             "莲藕", "笋", "山药", "菜", "蒜苗", "水芹", "甘蓝", "姜", "大蒜", "芋头", "红薯", "紫薯",
             "马铃薯", "西红柿", "萝卜", "海带", "芽", "椒", "茄子", "灵芝", "松茸", "竹荪", "木耳", "银耳",
             "葫芦", "芜菁", "牛蒡", "莴苣", "茴香", "芝麻", "花生", "大米", "牛肝菌", "玉米", "西蓝花", "薄荷",
-            "秋葵", "上海青", "魔芋", "菊苣", "鱼腥草"
+            "秋葵", "上海青", "魔芋", "菊苣", "鱼腥草", "鸡蛋"
         ]
         is_snack = False
+        is_garden = False
         for i in snack:
             if i in jz.detailed:
+                jz.superclass = '饮食'
                 jz.subclass = '零食'
                 is_snack = True
                 break
         if is_snack is False:
             for i in garden:
                 if i in jz.detailed:
+                    jz.superclass = '饮食'
                     jz.subclass = '果蔬'
+                    is_garden = False
                     break
+        if (is_snack or is_garden) is False:
+            if '外卖' in jz.detailed:
+                jz.superclass = '饮食'
+                jz.subclass = '餐饮'
+
    
     return {
         'superclass': jz.superclass, 
