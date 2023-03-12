@@ -35,9 +35,9 @@ def main(img_url):
         return json.dumps(jzdict)
 
     except Exception as e:
-        os._exit(1)
+        pass
 
 
 
 if __name__ == '__main__':
-    main('http://1.15.179.24:8001/api/file/9e7ebb2c-79c6-4aa7-ac7d-e928349c0a96.jpg')
+    main('http://1.15.179.24:8001/api/file/a13bcd5b-6ad1-4db7-a847-70210c7f68f3.jpg')
